@@ -3,7 +3,7 @@
 #' \code{pl_contour} computes the degree of plausibility of any number x for a given Gaussian
 #' random fuzzy number.
 #'
-#' cont(x,GRFN) returns the same value as Pl(x,x,GRFN), but is more efficient.
+#' pl_contour(x,GRFN) returns the same value as Pl(x,x,GRFN), but is more efficient.
 #'
 #' @param x The input value (can be a vector).
 #' @param GRFN A Gaussian random fuzzy number, encoded as a list with components mu, sig

@@ -90,7 +90,7 @@ n<-nrow(Boston)
 ntrain<-round(0.7*n)
 train <-sample(n,ntrain)
 cv<-ENNreg_cv(X=X[train,],y=y[train],K=30,XI=c(0.1,1,10),RHO=c(0.1,1,10))
-cv$RMScv
+cv$RMS
 fit <- ENNreg(X[train,],y[train],K=30,xi=cv$xi,rho=cv$rho)
 pred<-predict(fit,newdata=X[-train,],yt=y[-train])
 print(pred$RMS)

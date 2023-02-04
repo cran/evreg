@@ -34,8 +34,7 @@
 #' initial model is not supplied)
 #' @param lambda Parameter of the loss function (default=0.9)
 #' @param xi Regularization coefficient penalizing precision (default=0).
-#' @param rho Regularization coefficient penalizing precision shrinking the solution towards a
-#' linear model (default=0).
+#' @param rho Regularization coefficient shrinking the solution towards a linear model (default=0).
 #' @param eps Parameter of the loss function (if NULL, set to 0.01 times the standard deviation of y).
 #' @param nu Parameter of the loss function to avoid a division par zero (default=1e-16).
 #' @param optimProto If TRUE (default), the initial prototypes are optimized.
@@ -48,7 +47,6 @@
 #' \item{loss}{Value of the loss function.}
 #' \item{param}{Parameter values.}
 #' \item{K}{Number of prototypes.}
-#' \item{p}{Parameter values.}
 #' \item{pred}{Predictions on the training set (a list containing the prototype unit activations,
 #' the output means, variances and precisions, as well as the lower and upper expectations).}
 #' }

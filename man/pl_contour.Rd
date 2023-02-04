@@ -20,7 +20,7 @@ The degree of plausibility of x.
 random fuzzy number.
 }
 \details{
-cont(x,GRFN) returns the same value as Pl(x,x,GRFN), but is more efficient.
+pl_contour(x,GRFN) returns the same value as Pl(x,x,GRFN), but is more efficient.
 }
 \examples{
 pl<-pl_contour(1,list(mu=2,sig=1,h=2))

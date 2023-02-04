@@ -36,9 +36,9 @@
 #' }
 #'
 predict.ENNreg<-function(object,newdata,yt=NULL,...){
-  Xt<-as.matrix(newdata)
+  p<-ncol(object$param$W)
+  if(is.vector(newdata) & (p>1)) Xt<-matrix(newdata,ncol=p) else Xt<-as.matrix(newdata)
   nt<-nrow(Xt)
-  p<-ncol(Xt)
   K<-object$K
   d<-matrix(0,nt,K)
   a<-matrix(0,nt,K)
@@ -61,3 +61,4 @@ predict.ENNreg<-function(object,newdata,yt=NULL,...){
   return(list(mux=mux,sig2x=sig2x,hx=hx,Einf=mux-sqrt(pi/(2*hx)),Esup=mux+sqrt(pi/(2*hx)),
               NLL=NLL,RMS=RMS))
 }
+

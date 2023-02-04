@@ -56,7 +56,7 @@
 #' ntrain<-round(0.7*n)
 #' train <-sample(n,ntrain)
 #' cv<-ENNreg_cv(X=X[train,],y=y[train],K=30,XI=c(0.1,1,10),RHO=c(0.1,1,10))
-#' cv$RMScv
+#' cv$RMS
 #' fit <- ENNreg(X[train,],y[train],K=30,xi=cv$xi,rho=cv$rho)
 #' pred<-predict(fit,newdata=X[-train,],yt=y[-train])
 #' print(pred$RMS)
@@ -67,7 +67,11 @@ ENNreg_cv<-function(X,y,K,batch=TRUE,folds=NULL,Kfold=5,XI,RHO,nstart=100,c=1,
                     opt.rmsprop=list(batch_size=100,epsi=0.001,rho=0.9,delta=1e-8,Dtmax=100)){
   if(is.null(eps)) eps<-0.01*sd(y)
   n<-length(y)
-  if(is.null(folds)) folds <- sample(Kfold,n,replace=TRUE) else Kfold <- max(folds)
+  if(is.null(folds)){
+    ii<-sample(n,n)
+    folds<-rep(1,n)
+    for(k in 1:Kfold) folds[ii[seq(k,n,Kfold)]]<-k
+  }  else Kfold <- max(folds)
   N1<-length(XI)
   N2<-length(RHO)
   ERRcv<-matrix(0,N1,N2)
@@ -88,7 +92,7 @@ ENNreg_cv<-function(X,y,K,batch=TRUE,folds=NULL,Kfold=5,XI,RHO,nstart=100,c=1,
   RMS<-sqrt(ERRcv/n)
   imin<-which.min(apply(RMS,1,min))
   jmin<-which.min(apply(RMS,2,min))
-  if(verbose) cat("Best hyperparameter values:","\n","xi =",XI[imin], "rho =",RHO[jmin])
+  if(verbose) cat("Best hyperparameter values:","\n","xi =",XI[imin], "rho =",RHO[jmin],"\n")
   return(list(xi=XI[imin],rho=RHO[jmin],RMS=RMS))
 }
 

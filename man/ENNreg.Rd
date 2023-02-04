@@ -47,8 +47,7 @@ initial model is not supplied)}
 
 \item{xi}{Regularization coefficient penalizing precision (default=0).}
 
-\item{rho}{Regularization coefficient penalizing precision shrinking the solution towards a
-linear model (default=0).}
+\item{rho}{Regularization coefficient shrinking the solution towards a linear model (default=0).}
 
 \item{eps}{Parameter of the loss function (if NULL, set to 0.01 times the standard deviation of y).}
 
@@ -68,7 +67,6 @@ An object of class "ENNreg"  with the following components:
 \item{loss}{Value of the loss function.}
 \item{param}{Parameter values.}
 \item{K}{Number of prototypes.}
-\item{p}{Parameter values.}
 \item{pred}{Predictions on the training set (a list containing the prototype unit activations,
 the output means, variances and precisions, as well as the lower and upper expectations).}
 }

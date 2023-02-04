@@ -1,0 +1,8 @@
+Package: evreg
+Title: Evidential Regression
+
+Changes in version 1.0.1 
+
+* Correction of a bug in function "predict.ENNreg" that caused an error when the test set had only one instance.
+* The cross-validation subsets are sampled differently in function "ENNreg.cv" to avoid empty subsets when the initial sample is small.
+* Correction of typos in the documentation.
