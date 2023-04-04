@@ -24,6 +24,9 @@
 #' pl<-pl_contour(1,list(mu=2,sig=1,h=2))
 #' print(pl)
 pl_contour<-function(x,GRFN){
-  Z2<-GRFN$h*GRFN$sig^2+1
-  return(1/sqrt(Z2)*exp(-0.5*GRFN$h*(x-GRFN$mu)^2/Z2))
+  if(GRFN$h==0) pl<-rep(1,length(x)) else{
+    Z2<-GRFN$h*GRFN$sig^2+1
+    pl<-1/sqrt(Z2)*exp(-0.5*GRFN$h*(x-GRFN$mu)^2/Z2)
+  }
+  return(pl)
 }

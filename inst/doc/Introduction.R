@@ -101,16 +101,16 @@ GRFN2<-list(mu=1,sig=1,h=1)
 ## -----------------------------------------------------------------------------
 GRFN12s<-combination_GRFN(GRFN1,GRFN2,soft=TRUE)
 GRFN12h<-combination_GRFN(GRFN1,GRFN2,soft=FALSE)
-print(GRFN12s)
-print(GRFN12h)
+print(GRFN12s$GRFN)
+print(GRFN12h$GRFN)
 
 ## ---- fig.width=5, fig.height=5-----------------------------------------------
 x<-seq(-4,6,0.01)
 plot(x,pl_contour(x,GRFN1),type="l",xlab="x",ylab="plausibility",lwd=2,
      ylim=c(0,1),col="blue")
 lines(x,pl_contour(x,GRFN2),lwd=2,lty=1,col="red")
-lines(x,pl_contour(x,GRFN12s),lwd=2,lty=2,col="green")
-lines(x,pl_contour(x,GRFN12h),lwd=2,lty=2,col="cyan")
+lines(x,pl_contour(x,GRFN12s$GRFN),lwd=2,lty=2,col="green")
+lines(x,pl_contour(x,GRFN12h$GRFN),lwd=2,lty=2,col="cyan")
 legend("topright",legend=c("GRFN1","GRFN2","soft comb.","hard comb."),
        lty=c(1,1,2,2),bty="n",col=c("blue","red","green","cyan"))
 

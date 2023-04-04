@@ -1,6 +1,13 @@
 Package: evreg
 Title: Evidential Regression
 
+Changes in version 1.0.2
+
+* Function "combination_GRFN" now returns a list with the combined GRFN and the degree of conflict.
+* Function "combination_GRFN" has been modified to produce correct results when GRFN1$sig=0 or  GRFN2$sig0, and when GRFN1$h=GRFN2$h=0.
+* Function pl_contour has been modified to produce correct results when the GRFN is vacuous and one of the bounds in infinite.
+
+
 Changes in version 1.0.1 
 
 * Correction of a bug in function "predict.ENNreg" that caused an error when the test set had only one instance.
