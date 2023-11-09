@@ -25,6 +25,7 @@
 #'
 #' @docType package
 #' @name evreg
+#' @aliases evreg-package
 #'
 #' @seealso \code{\link{ENNreg}}, \code{\link{ENNreg_init}},\code{\link{ENNreg_cv}},
 #' \code{\link{ENNreg_holdout}}, \code{\link{predict.ENNreg}}, \code{\link{intervals}},
