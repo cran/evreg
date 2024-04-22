@@ -39,9 +39,9 @@
 #' Springer, 2022.
 #'
 #' Thierry Denoeux. Quantifying prediction uncertainty in regression using random fuzzy sets: the ENNreg
-#' model. TechRxiv preprint, 2023b.
+#' model. IEEE Transactions on Fuzzy Systems, Vol. 31, Issue 10, pages 3690-3699, 2023.
 #'
 #' Thierry Denoeux. Reasoning with fuzzy and uncertain evidence using epistemic random
 #' fuzzy sets: general framework and practical models. Fuzzy Sets and Systems, Vol. 453,
-#' Pages 1-36, 2023a.
+#' Pages 1-36, 2023.
 NULL

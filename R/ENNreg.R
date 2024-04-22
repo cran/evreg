@@ -61,7 +61,7 @@
 #' Springer, 2022.
 #'
 #' Thierry Denoeux. Quantifying prediction uncertainty in regression using random fuzzy sets: the ENNreg
-#' model. TechRxiv preprint, 2023b
+#' model. IEEE Transactions on Fuzzy Systems, Vol. 31, Issue 10, pages 3690-3699, 2023.
 #'
 #' @seealso \code{\link{predict.ENNreg}}, \code{\link{ENNreg_init}}, \code{\link{ENNreg_cv}},
 #' \code{\link{ENNreg_holdout}}
@@ -103,10 +103,6 @@ ENNreg<-function(X,y,init=NULL,K=NULL,batch=TRUE,nstart=100,c=1,lambda=0.9,xi=0,
                  xi=xi,rho=rho,nu=nu,optimProto=optimProto,opt.rmsprop=opt.rmsprop)
   }
 
-
-
-
-
   psi<-opt$par
   alpha<-psi[1:K]
   beta<-psi[(K+1):(K*p+K)]
@@ -134,7 +130,8 @@ ENNreg<-function(X,y,init=NULL,K=NULL,batch=TRUE,nstart=100,c=1,lambda=0.9,xi=0,
             param=list(alpha=alpha,Beta=Beta,sig=sig,h=h,gam=gam,W=W,psi=psi),
             K=K,
             pred=list(s=a,mux=mux,sig2x=sig2x,hx=hx,Einf=mux-sqrt(pi/(2*hx))),
-            Esup=mux+sqrt(pi/(2*hx)))
+            Esup=mux+sqrt(pi/(2*hx)),
+            hyper=list(K=K,nu=nu,xi=xi,rho=rho,lambda=lambda,eps=eps,c=c))
   class(fit)<-"ENNreg"
   return(fit)
 }

@@ -102,7 +102,7 @@ numbers. In "Belief functions: Theory and applications (proc. of BELIEF 2022)", 
 Springer, 2022.
 
 Thierry Denoeux. Quantifying prediction uncertainty in regression using random fuzzy sets: the ENNreg
-model. TechRxiv preprint, 2023b
+model. IEEE Transactions on Fuzzy Systems, Vol. 31, Issue 10, pages 3690-3699, 2023.
 }
 \seealso{
 \code{\link{ENNreg}}, \code{\link{ENNreg_holdout}}

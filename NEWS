@@ -1,6 +1,13 @@
 Package: evreg
 Title: Evidential Regression
 
+Changes in version 1.0.4
+
+* A bug in function ENNreg_init has been corrected.
+* Function ENNreg now returns the list of all hyperparameters.
+* References have been updated.
+
+
 Changes in version 1.0.3
 
 * The line "@aliases evreg-package" has been added to the file "evreg.R" to facilitate access to the documentation.

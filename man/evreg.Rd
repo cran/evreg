@@ -3,6 +3,7 @@
 \docType{package}
 \name{evreg}
 \alias{evreg}
+\alias{evreg-package}
 \title{evreg: A package for evidential regression}
 \description{
 The evreg package implements ENNreg  (Denoeux 2022, 2023b), a neural network model for
@@ -34,11 +35,11 @@ numbers. In "Belief functions: Theory and applications (proc. of BELIEF 2022)", 
 Springer, 2022.
 
 Thierry Denoeux. Quantifying prediction uncertainty in regression using random fuzzy sets: the ENNreg
-model. TechRxiv preprint, 2023b.
+model. IEEE Transactions on Fuzzy Systems, Vol. 31, Issue 10, pages 3690-3699, 2023.
 
 Thierry Denoeux. Reasoning with fuzzy and uncertain evidence using epistemic random
 fuzzy sets: general framework and practical models. Fuzzy Sets and Systems, Vol. 453,
-Pages 1-36, 2023a.
+Pages 1-36, 2023.
 }
 \seealso{
 \code{\link{ENNreg}}, \code{\link{ENNreg_init}},\code{\link{ENNreg_cv}},

@@ -41,7 +41,7 @@ ENNreg_init<-function(X,y,K,nstart=100,c=1){
     nk<-length(ii)
     alpha[k]<-mean(y[ii])
     if(nk>1){
-      gam[k]<-1/sqrt(clus$withinss[k]/nk)
+      gam[k]<-1/sqrt(1e-3+clus$withinss[k]/nk)
       sig[k]<-sd(y[ii])
     }
   }

@@ -14,7 +14,7 @@
 #' \describe{
 #' \item{GRFN}{The combined Gaussian random fuzzy number, encoded as a list with components
 #' mu, sig and h.}
-#' \item{conflict}{The degree of conflict (equal to 0 if \code{soft==TRUE}).}
+#' \item{conflict}{The degree of conflict (equal to 0 if \code{soft==FALSE}).}
 #' }
 #' @export
 #'
