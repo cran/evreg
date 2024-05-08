@@ -55,27 +55,27 @@ test<-gendat(nt)
 ### Hyperparameter tuning and learning
 
 Let us determine hyperparameters $\xi$ and $\rho$ using cross-validation, with batch training and $K=30$ prototypes:
-```{r}
+```{r hyperparameter tuning}
 cv<-ENNreg_cv(train$x,train$y,K=30,XI=c(0,0.01,0.1),RHO=c(0,0.01,0.1),verbose=FALSE)
 cv
 ```
 
 We can then train again the model using all the training data and the selected hyperparameters:
 
-```{r}
+```{r training}
 fit<-ENNreg(train$x,train$y,K=30,xi=cv$xi,rho=cv$rho,verbose=FALSE)
 ```
 
 Let us now compute the predictions for regularly spaced inputs:
 
-```{r}
+```{r prediction}
 xt<-seq(-4,5,0.01)
 pred<-predict(fit,xt)
 ```
 
 and let us compute belief intervals at levels 50\%, 90\% and 99\%:
 
-```{r}
+```{r compute belief intervals}
 int50<-intervals(pred,0.50)
 int90<-intervals(pred,0.9)
 int99<-intervals(pred,0.99)
@@ -83,7 +83,7 @@ int99<-intervals(pred,0.99)
 
 We can now plot the results using function `ggplot` of package ``ggplot2`:
 
-```{r, fig.width=5, fig.height=5}
+```{r plot predictions, fig.width=5, fig.height=5}
 library(ggplot2)
 int<-data.frame(lwr50=int50$INTBel[,1],upr50=int50$INTBel[,2],
                 lwr90=int90$INTBel[,1],upr90=int90$INTBel[,2],
@@ -101,30 +101,32 @@ ggplot(data=as.data.frame(train), aes(x = x)) +
 
 Let us now plot calibration curves for probabilistic and belief prediction intervals. We start by computing the predictions for the test set:
 
-```{r}
+```{r predict on test set}
 pred.tst<-predict(fit,test$x,test$y)
 ```
 
-We then compute prediction intervals and their coverage rates for 9 equally spaced levels between 0.1 and 0.9:
+We then compute belief intervals with their coverage rates and plausibilities for 9 equally spaced levels between 0.1 and 0.9:
 
-```{r}
+```{r compute intervals and coverage}
 A<-seq(0.1,0.9,0.1)
 nA<-length(A)
 probbel<-rep(0,nA)
-probp<-rep(0,nA)
+plbel<-rep(0,nA)
 for(i in 1:nA){
   int<-intervals(pred.tst,A[i],test$y)
   probbel[i]<-int$coverage.Bel
-  probp[i]<-int$coverage.P
+  plbel[i]<-int$Pl.Bel
 }
 ```
 
 Finally, we can plot the calibration curves:
 
-```{r, fig.width=5, fig.height=5}
+```{r plot calibration curve, fig.width=5, fig.height=5}
 oldpar <- par(pty="s")
-plot(c(0,A,1),c(0,probp,1),type="l",lwd=2,col="blue",xlab="",ylab="")
+plot(c(0,A,1),c(0,plbel,1),type="l",lwd=2,col="blue",xlab="",ylab="")
+points(c(0,A,1),c(0,plbel,1),pch=21,bg="blue",cex=1.5)
 lines(c(0,A,1),c(0,probbel,1),col="red",lwd=2)
+points(c(0,A,1),c(0,probbel,1),pch=22,bg="red",cex=1.5)
 abline(0,1,lty=2)
 title(ylab="coverage rate", line=2.2, cex.lab=1.2)
 title(xlab="level", line=2.2, cex.lab=1.2)
@@ -137,12 +139,12 @@ par(oldpar)
 The `evreg` package also contains functions for computing with, and combining GRFNs. For instance, functions `Bel` and `Pl` compute, respectively, the degrees of belief and plausibility of intervals $[x,y]$. Let us illustrate the use of these functions for plotting $Bel([x-r,x+r])$ and $Pl([x-r,x+r])$ as functions of $x$, for different values of $r$. We start by defining the GRFN:
 
 ```{r}
-GRFN<-list(mu=1,sig=1,h=1)
+GRFN<-list(mu=1,sig=0.5,h=1)
 ```
 
 We can then draw the "belief plot":
 
-```{r, fig.width=5, fig.height=5}
+```{r draw belief plot, fig.width=5, fig.height=5}
 x<-seq(-4,6,0.01)
 plot(x,Bel(x-1,x+1,GRFN),type="l",xlab="x",ylab="Bel([x-r,x+r])",
      lwd=2,ylim=c(0,1))
@@ -153,7 +155,7 @@ legend("topright",legend=c("r=1","r=0.5","r=0.1"),lty=c(1,2,3),bty="n")
 
 and the "plausibility plot":
 
-```{r, fig.width=5, fig.height=5}
+```{r draw plausibility plot, fig.width=5, fig.height=5}
 plot(x,Pl(x-1,x+1,GRFN),type="l",xlab="x",ylab="Pl([x-r,x+r])",lwd=2,ylim=c(0,1))
 lines(x,Pl(x-0.5,x+0.5,GRFN),lwd=2,lty=2)
 lines(x,pl_contour(x,GRFN),lwd=2,lty=3)
@@ -162,7 +164,7 @@ legend("topright",legend=c("r=1","r=0.5","r=0"),lty=c(1,2,3),bty="n")
 
 We can also plot the lower cumulative distribution function (cdf) $F_*(x)=Bel((-\infty,x])$ and the upper cdf $F^*(x)=Pl((-\infty,x])$ as follows:
 
-```{r, fig.width=5, fig.height=5}
+```{r plot cdfs, fig.width=5, fig.height=5}
 plot(x,Bel(-Inf,x,GRFN),type="l",xlab="x",ylab="Lower/upper cdfs",lwd=2)
 lines(x,Pl(-Inf,x,GRFN),type="l",lwd=2)
 ```
@@ -185,7 +187,7 @@ print(GRFN12h$GRFN)
 
 We can see that the results are quite different. Here is a plot of the contour functions of the initial and combined GRFNs:
 
-```{r, fig.width=5, fig.height=5}
+```{r plot combinations, fig.width=5, fig.height=5}
 x<-seq(-4,6,0.01)
 plot(x,pl_contour(x,GRFN1),type="l",xlab="x",ylab="plausibility",lwd=2,
      ylim=c(0,1),col="blue")

@@ -20,6 +20,7 @@ A list with four elements:
 \item{INTBel}{Matrix (n,2) of belief prediction intervals.}
 \item{coverage.P}{Estimated coverage rate of the probabilistic intervals (if yt is provided).}
 \item{coverage.Bel}{Estimated coverage rate of the belief intervals (if yt is provided).}
+\item{Pl.Bel}{Mean plausibility of the belief intervals.}
 }
 }
 \description{

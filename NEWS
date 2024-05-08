@@ -1,9 +1,17 @@
 Package: evreg
 Title: Evidential Regression
 
+
+Changes in version 1.1.0
+
+* An error in the formula used in function "Bel" has been corrected.
+* The calculation of the loss function and its gradient in ENNreg has been corrected.
+* Function "intervals" now returns the average plausibility of the belief intervals.
+
+
 Changes in version 1.0.4
 
-* A bug in function ENNreg_init has been corrected.
+* A bug in function "ENNreg_init" has been corrected.
 * Function ENNreg now returns the list of all hyperparameters.
 * References have been updated.
 

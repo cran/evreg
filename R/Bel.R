@@ -26,9 +26,15 @@
 #' print(bel)
 Bel <- function(x,y,GRFN){
   sig1<-GRFN$sig*sqrt(GRFN$h*GRFN$sig^2+1)
+  epsi<-GRFN$h*GRFN$sig^2
   A<-pnorm(y,GRFN$mu,GRFN$sig)-pnorm(x,GRFN$mu,GRFN$sig)
-  B<-pl_contour(x,GRFN)*(pnorm((x+y)/2,GRFN$mu,sig1)-pnorm(x,GRFN$mu,sig1))
-  C<-pl_contour(y,GRFN)*(pnorm(y,GRFN$mu,sig1)-pnorm((x+y)/2,GRFN$mu,sig1))
+  if(epsi==1){
+    B<-pl_contour(x,GRFN)*(pnorm(y*(1+epsi)/2,GRFN$mu,sig1)-pnorm(x,GRFN$mu,sig1))
+    C<-pl_contour(y,GRFN)*(pnorm(y,GRFN$mu,sig1)-pnorm(x*(1+epsi)/2,GRFN$mu,sig1))
+  } else{
+    B<-pl_contour(x,GRFN)*(pnorm(x*(1-epsi)/2+y*(1+epsi)/2,GRFN$mu,sig1)-pnorm(x,GRFN$mu,sig1))
+    C<-pl_contour(y,GRFN)*(pnorm(y,GRFN$mu,sig1)-pnorm(x*(1+epsi)/2+y*(1-epsi)/2,GRFN$mu,sig1))
+  }
   bel<-pmax(0,A-B-C)
   return(bel)
 }
